@@ -16,7 +16,7 @@ class AllureFileLogger:
         self._report_dir = report_dir
 
         try:
-            os.makedirs(report_dir)
+            os.makedirs(report_dir, exist_ok=True)
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise

@@ -1,3 +1,5 @@
+import os
+
 import pytest
 import doctest
 import allure_commons
@@ -93,8 +95,8 @@ class AllureListener:
         test_result.name = allure_name(item, params)
         full_name = allure_full_name(item)
         test_result.fullName = full_name
-        test_result.historyId = md5(item.nodeid)
-        test_result.testCaseId = md5(full_name)
+        test_result.historyId = f"{md5(item.nodeid)}_{os.getpid()}"
+        test_result.testCaseId = f"{md5(full_name)}_{os.getpid()}"
         test_result.description = allure_description(item)
         test_result.descriptionHtml = allure_description_html(item)
         current_param_names = [param.name for param in test_result.parameters]
